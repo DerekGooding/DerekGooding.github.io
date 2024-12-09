@@ -24,8 +24,14 @@ jobs:
     - name: Build Blazor App
       run: dotnet publish -c Release -o ./bin/Release/net9.0/publish
 
+    - name: List files in publish directory
+      run: ls -R ./bin/Release/net9.0/publish/wwwroot
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./bin/Release/net9.0/publish/wwwroot
+
+    - name: Force update of the deployment
+      run: git commit --allow-empty -m "Force GitHub Pages update"
