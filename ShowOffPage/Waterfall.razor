@@ -1,0 +1,26 @@
+﻿@page "/waterfall"
+
+<div class="waterfall-container">
+    @foreach (var item in Items)
+    {
+        <div class="waterfall-item">
+            <img src="@item.ImageUrl" alt="Waterfall item" />
+            <div class="waterfall-content">
+                <h3>@item.Title</h3>
+                <p>@item.Description</p>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<WaterfallItem> Items = new List<WaterfallItem>
+    {
+        new WaterfallItem("Item 1", "This is the first item.", "https://via.placeholder.com/150"),
+        new WaterfallItem("Item 2", "This is the second item.", "https://via.placeholder.com/150"),
+        new WaterfallItem("Item 3", "This is the third item.", "https://via.placeholder.com/150"),
+        // Add more items as needed
+    };
+
+    public record WaterfallItem(string Title, string Description, string ImageUrl);
+}
