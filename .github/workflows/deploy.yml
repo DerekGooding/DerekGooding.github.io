@@ -6,6 +6,20 @@ on:
       - master
 
 jobs:
+  Configure:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Configure GitHub Pages
+      uses: actions/configure-pages@v5
+
+  Artifact:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Upload GitHub Pages artifact
+      uses: actions/upload-pages-artifact@v3    
+
   build-and-deploy:
     runs-on: ubuntu-latest
 
