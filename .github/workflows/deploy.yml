@@ -19,7 +19,7 @@ jobs:
         dotnet-version: 9.0
 
     - name: Build Blazor App
-      run: dotnet publish -c Release build
+      run: dotnet publish -c Release --output build
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
