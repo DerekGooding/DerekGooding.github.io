@@ -33,5 +33,10 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./bin/Release/net9.0/publish/wwwroot
 
+    - name: Set up Git user
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+
     - name: Force update of the deployment
       run: git commit --allow-empty -m "Force GitHub Pages update"
