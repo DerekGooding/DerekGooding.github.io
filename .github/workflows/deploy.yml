@@ -18,11 +18,14 @@ jobs:
       with:
         dotnet-version: 9.0
 
+    - name: Install dependencies
+      run: dotnet restore
+
     - name: Build Blazor App
-      run: dotnet publish -c Release --output build
+      run: dotnet publish -c Release -o ./bin/Release/net9.0/publish
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: build/wwwroot
+        publish_dir: ./bin/Release/net9.0/publish/wwwroot
