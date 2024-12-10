@@ -24,12 +24,13 @@ jobs:
         run: |
           dotnet workload restore
           dotnet workload install wasm-tools
+          dotnet restore --no-cache
 
       - name: Build and Publish Blazor App
         run: |
           dotnet restore ShowOffPage/ShowOffPage.csproj
           dotnet build ShowOffPage/ShowOffPage.csproj -c Release
-          dotnet publish ShowOffPage/ShowOffPage.csproj -c Release -o build_output --self-contained false
+          dotnet publish ShowOffPage/ShowOffPage.csproj -c Release -o build_output --self-contained false -r browser-wasm
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
