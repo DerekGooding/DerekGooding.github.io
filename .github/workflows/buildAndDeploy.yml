@@ -1,0 +1,36 @@
+name: Deploy Blazor App to GitHub Pages
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code from your repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up .NET
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0
+
+      # Restore, build, and publish the Blazor application
+      - name: Build and Publish
+        run: |
+          dotnet restore
+          dotnet publish -c Release -o build_output --self-contained false
+
+      # Deploy the published files to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # Target branch for GitHub Pages
+          folder: build_output/wwwroot # Folder containing the built Blazor app
