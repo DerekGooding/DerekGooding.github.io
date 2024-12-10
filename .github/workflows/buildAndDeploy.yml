@@ -20,13 +20,17 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.0
+          dotnet-version: 9.0 # Adjust to your targeted version
 
-      # Restore, build, and publish the Blazor application
-      - name: Build and Publish
+      # Restore workloads
+      - name: Restore Workloads
+        run: dotnet workload restore
+
+      # Restore, build, and publish the Blazor project
+      - name: Build and Publish Blazor App
         run: |
-          dotnet restore
-          dotnet publish -c Release -o build_output --self-contained false
+          dotnet restore ShowOffPage/ShowOffPage.csproj
+          dotnet publish ShowOffPage/ShowOffPage.csproj -c Release -o build_output --self-contained false
 
       # Deploy the published files to GitHub Pages
       - name: Deploy to GitHub Pages
