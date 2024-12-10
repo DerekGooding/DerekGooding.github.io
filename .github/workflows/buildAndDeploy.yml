@@ -20,7 +20,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.0 # Adjust to your targeted version
+          dotnet-version: 9.0
 
       # Restore workloads
       - name: Restore Workloads
@@ -36,5 +36,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages # Target branch for GitHub Pages
-          folder: build_output/wwwroot # Folder containing the built Blazor app
+          branch: gh-pages 
+          folder: build_output/wwwroot 
