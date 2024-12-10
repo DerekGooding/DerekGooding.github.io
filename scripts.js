@@ -1,0 +1,3 @@
+﻿function initializeAOS() {
+    AOS.init();
+}
