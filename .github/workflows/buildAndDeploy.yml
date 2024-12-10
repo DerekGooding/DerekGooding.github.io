@@ -12,29 +12,27 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the code from your repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.0 # Adjust to your targeted version
+          dotnet-version: 9.0
 
-      # Restore workloads
-      - name: Restore Workloads
-        run: dotnet workload restore
+      - name: Restore and Install Workloads
+        run: |
+          dotnet workload restore
+          dotnet workload install wasm-tools
 
-      # Restore, build, and publish the Blazor project
       - name: Build and Publish Blazor App
         run: |
           dotnet restore ShowOffPage/ShowOffPage.csproj
+          dotnet build ShowOffPage/ShowOffPage.csproj -c Release
           dotnet publish ShowOffPage/ShowOffPage.csproj -c Release -o build_output --self-contained false
 
-      # Deploy the published files to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages # Target branch for GitHub Pages
-          folder: build_output/wwwroot # Folder containing the built Blazor app
+          branch: gh-pages
+          folder: build_output/wwwroot
