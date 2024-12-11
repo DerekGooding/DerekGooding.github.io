@@ -13,4 +13,10 @@
 	<RuntimeHostConfigurationOption Include="Microsoft.NET.RuntimePack.BlazorWebAssembly" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Itch.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>
